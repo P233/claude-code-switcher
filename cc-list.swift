@@ -29,7 +29,7 @@ struct Session {
 let statusIcons: [String: String] = [
     "running": "🟢",
     "idle": "🟡",
-    "not-init": "⚪",
+    "standby": "⚪",
 ]
 
 // MARK: - File Reading
@@ -95,14 +95,8 @@ func buildSessionList() -> [Session] {
         }
     }
 
-    sessions = sessions.map { s in
-        Session(
-            projectName: s.projectName,
-            cwd: s.cwd,
-            status: s.status,
-            runningTimestamp: s.runningTimestamp
-        )
-    }
+    // Only keep sessions whose cwd has a live IDE lock
+    sessions = sessions.filter { locksByCwd[$0.cwd] != nil }
 
     let sessionCwds = Set(sessions.map { $0.cwd })
     for (cwd, _) in locksByCwd where !sessionCwds.contains(cwd) {
@@ -110,7 +104,7 @@ func buildSessionList() -> [Session] {
         sessions.append(Session(
             projectName: name,
             cwd: cwd,
-            status: "not-init",
+            status: "standby",
             runningTimestamp: nil
         ))
     }

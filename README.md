@@ -94,7 +94,7 @@ Type **cc** in Alfred.
     idle — /Users/you/projects/api-server
 
 ⚪  old-project                  ← VSCode open, no CC session yet
-    not-init — /Users/you/projects/old-project
+    standby — /Users/you/projects/old-project
 ```
 
 Status icons:
@@ -103,7 +103,7 @@ Status icons:
 |------|--------|---------|
 | 🟢 | `running` | Claude is actively processing a prompt |
 | 🟡 | `idle` | Session is open, waiting for input |
-| ⚪ | `not-init` | VSCode IDE lock found, but no CC session started |
+| ⚪ | `standby` | VSCode open, no CC session started |
 
 After selecting and pressing Enter:
 1. The matching VSCode window is focused
@@ -191,7 +191,7 @@ After install:
 
 - Window focus is at the VSCode window level; cannot target a specific terminal tab
 - `/tmp/cc-status/` is cleared on macOS reboot
-- If CC exits abnormally, `SessionEnd` may not fire, leaving stale status files in `/tmp/cc-status/`. These can be cleared manually with `rm /tmp/cc-status/*.json`
+- If CC exits abnormally, `SessionEnd` may not fire, leaving stale status files in `/tmp/cc-status/`. These are automatically hidden (filtered by live IDE lock), and cleared on reboot
 - IDE lock files are filtered by process liveness — stale locks from crashed sessions are automatically ignored
 - Requires Xcode Command Line Tools to compile
 - Requires Accessibility permission for window focus

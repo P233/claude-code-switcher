@@ -26,6 +26,8 @@ Two data sources merged in `cc-list`:
 
 **`active` status removed.** `SessionStart` writes `idle` directly — "session just opened" and "waiting for input" are the same from the user's perspective.
 
+**IDE lock gating.** Status files (`/tmp/cc-status/`) are only shown if their `cwd` has a live IDE lock. This automatically hides stale entries when VSCode windows are closed without a proper `SessionEnd` hook firing.
+
 **No session ID display.** This tool is VSCode-focused; each project maps to one window. Session IDs only matter for multi-session-per-directory terminal usage, which isn't supported here.
 
 ## Session States
@@ -34,7 +36,8 @@ Two data sources merged in `cc-list`:
 |--------|------|---------|
 | `running` | `UserPromptSubmit` | Claude is processing |
 | `idle` | `SessionStart`, `Stop` | Waiting for input |
-| `not-init` | — | IDE lock exists, no CC session |
+| `standby` | — | IDE lock exists, no CC session |
+| *(filtered)* | — | Status file exists but no live IDE lock |
 | *(deleted)* | `SessionEnd` | File removed |
 
 ## Files
