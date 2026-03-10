@@ -44,6 +44,7 @@ Two data sources merged in `cc-list`:
 
 | File | Role |
 |------|------|
+| `shared.swift` | Shared data models, file utilities, and session-building logic |
 | `cc-list.swift` | Reads status + lock files, outputs Alfred JSON |
 | `cc-focus.swift` | Focuses VSCode window via Cocoa + AX API |
 | `status-writer.sh` | Hook script — writes JSON to `/tmp/cc-status/` |
@@ -66,6 +67,6 @@ Compiled binaries (`cc-list`, `cc-focus`) and the packaged workflow (`Claude-Cod
 ## When Modifying
 
 - Compile with `./build.sh`, then repackage and reimport the Alfred Workflow via `install.sh`
-- If changing the status JSON schema, update `CCStatus` in both Swift files
+- If changing the status JSON schema, update `CCStatus` in `shared.swift`
 - If adding a new hook event, update `hooks-config.json` and `status-writer.sh` comment
 - Keep `info.plist` Alfred readme section in sync with actual status icons/behavior

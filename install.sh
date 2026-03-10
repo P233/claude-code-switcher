@@ -21,19 +21,7 @@ if ! command -v swiftc &>/dev/null; then
     exit 1
 fi
 
-swiftc "$SCRIPT_DIR/cc-list.swift" \
-    -o "$SCRIPT_DIR/cc-list" \
-    -O 2>&1
-chmod +x "$SCRIPT_DIR/cc-list"
-echo -e "   ${GREEN}✓${NC} cc-list ($(du -h "$SCRIPT_DIR/cc-list" | cut -f1))"
-
-swiftc "$SCRIPT_DIR/cc-focus.swift" \
-    -o "$SCRIPT_DIR/cc-focus" \
-    -O \
-    -framework Cocoa \
-    -framework ApplicationServices 2>&1
-chmod +x "$SCRIPT_DIR/cc-focus"
-echo -e "   ${GREEN}✓${NC} cc-focus ($(du -h "$SCRIPT_DIR/cc-focus" | cut -f1))"
+"$SCRIPT_DIR/build.sh"
 
 # 2. Install hooks script
 echo ""

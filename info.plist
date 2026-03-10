@@ -146,7 +146,7 @@ Or type "cc" in Alfred.
 Status icons:
 🟢 running - CC is actively working
 🟡 idle    - CC finished, waiting for input
-⚪ not-init - IDE lock found but no status
+⚪ standby - IDE lock found but no CC session
 
 Select a session to jump to its VSCode window.</string>
 	<key>version</key>
