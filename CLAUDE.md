@@ -13,7 +13,7 @@ Alfred hotkey → cc-list → Alfred list → select → cc-focus <name> → AX 
 ```
 
 Two data sources merged in `cc-list`:
-- `/tmp/cc-status/*.json` — written by hooks; tracks running/idle state and timestamps
+- `/tmp/cc-status/*.json` — written by hooks; tracks session state and timestamps
 - `~/.claude/ide/*.lock` — written by VSCode extension; tracks which workspace is open
 
 ## Key Design Decisions
@@ -22,7 +22,7 @@ Two data sources merged in `cc-list`:
 
 **No cache.** /tmp reads are cheap. Removing the cache keeps the code simple and makes status changes immediately visible.
 
-**`rerun: 1` is conditional.** Only included in Alfred JSON output when at least one session is `running`. No polling when nothing is active.
+**`rerun: 1` is conditional.** Only included in Alfred JSON output when at least one session is `running` or `waiting`. No polling when nothing is active.
 
 **`active` status removed.** `SessionStart` writes `idle` directly — "session just opened" and "waiting for input" are the same from the user's perspective.
 
@@ -35,6 +35,7 @@ Two data sources merged in `cc-list`:
 | Status | Hook | Meaning |
 |--------|------|---------|
 | `running` | `UserPromptSubmit` | Claude is processing |
+| `waiting` | `PermissionRequest` | Waiting for user to approve a tool call |
 | `idle` | `SessionStart`, `Stop` | Waiting for input |
 | `standby` | — | IDE lock exists, no CC session |
 | *(filtered)* | — | Status file exists but no live IDE lock |

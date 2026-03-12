@@ -144,9 +144,14 @@ Press Cmd+` to list all Claude Code sessions.
 Or type "cc" in Alfred.
 
 Status icons:
-🟢 running - CC is actively working
-🟡 idle    - CC finished, waiting for input
-⚪ standby - IDE lock found but no CC session
+
+🟠 running — CC is actively working
+
+🔵 waiting — CC needs permission approval
+
+🟢 idle — CC finished, waiting for input
+
+⚪ standby — IDE lock found but no CC session
 
 Select a session to jump to its VSCode window.</string>
 	<key>version</key>
