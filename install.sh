@@ -47,7 +47,7 @@ if [ -f "$SETTINGS_FILE" ]; then
         echo -e "   ${YELLOW}⚠${NC} Existing settings detected: $SETTINGS_FILE"
         echo ""
         echo "   Manually merge the following events into the hooks field of your settings.json:"
-        echo "   SessionStart, UserPromptSubmit, PermissionRequest, Stop, SessionEnd"
+        echo "   SessionStart, UserPromptSubmit, Stop, SessionEnd"
         echo "   See hooks-config.json for reference."
     fi
 else

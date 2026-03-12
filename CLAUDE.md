@@ -22,7 +22,9 @@ Two data sources merged in `cc-list`:
 
 **No cache.** /tmp reads are cheap. Removing the cache keeps the code simple and makes status changes immediately visible.
 
-**`rerun: 1` is conditional.** Only included in Alfred JSON output when at least one session is `running` or `waiting`. No polling when nothing is active.
+**`rerun: 1` is conditional.** Only included in Alfred JSON output when at least one session is `running`. No polling when nothing is active.
+
+**No `waiting` status.** `PermissionRequest` hook can detect when Claude is waiting for tool approval, but there is no hook event for permission approval/denial. After the user approves, the status would stay stuck on `waiting` instead of returning to `running` — only the next `UserPromptSubmit` or `Stop` would update it. This makes the status unreliable, so it's not tracked.
 
 **`active` status removed.** `SessionStart` writes `idle` directly — "session just opened" and "waiting for input" are the same from the user's perspective.
 
@@ -35,7 +37,6 @@ Two data sources merged in `cc-list`:
 | Status | Hook | Meaning |
 |--------|------|---------|
 | `running` | `UserPromptSubmit` | Claude is processing |
-| `waiting` | `PermissionRequest` | Waiting for user to approve a tool call |
 | `idle` | `SessionStart`, `Stop` | Waiting for input |
 | `standby` | — | IDE lock exists, no CC session |
 | *(filtered)* | — | Status file exists but no live IDE lock |

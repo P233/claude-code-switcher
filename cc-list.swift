@@ -4,7 +4,6 @@ import Foundation
 
 let statusIcons: [String: String] = [
     "running": "🟠",
-    "waiting": "🔵",
     "idle": "🟢",
     "standby": "⚪",
 ]
@@ -51,7 +50,7 @@ func buildOutput(from sessions: [BaseSession]) -> String {
     }
 
     var result: [String: Any] = ["items": items]
-    if sessions.contains(where: { $0.status == "running" || $0.status == "waiting" }) {
+    if sessions.contains(where: { $0.status == "running" }) {
         result["rerun"] = 1
     }
 

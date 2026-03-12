@@ -87,10 +87,10 @@ Type **cc** in Alfred.
 ### Session List
 
 ```
-🟢  my-app  2m 34s              ← running, elapsed time shown
+🟠  my-app  2m 34s              ← running, elapsed time shown
     running — /Users/you/projects/my-app
 
-🟡  api-server                  ← idle, waiting for input
+🟢  api-server                  ← idle, waiting for input
     idle — /Users/you/projects/api-server
 
 ⚪  old-project                  ← VSCode open, no CC session yet
@@ -101,8 +101,8 @@ Status icons:
 
 | Icon | Status | Meaning |
 |------|--------|---------|
-| 🟢 | `running` | Claude is actively processing a prompt |
-| 🟡 | `idle` | Session is open, waiting for input |
+| 🟠 | `running` | Claude is actively processing a prompt |
+| 🟢 | `idle` | Session is open, waiting for input |
 | ⚪ | `standby` | VSCode open, no CC session started |
 
 After selecting and pressing Enter:
@@ -189,6 +189,7 @@ After install:
 
 ## Known Limitations
 
+- No "waiting for permission" status — `PermissionRequest` hook can detect when Claude asks for tool approval, but no hook fires when permission is granted/denied, so the status would get stuck on `waiting` instead of returning to `running`
 - Window focus is at the VSCode window level; cannot target a specific terminal tab
 - `/tmp/cc-status/` is cleared on macOS reboot
 - If CC exits abnormally, `SessionEnd` may not fire, leaving stale status files in `/tmp/cc-status/`. These are automatically hidden (filtered by live IDE lock), and cleared on reboot

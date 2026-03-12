@@ -1,7 +1,7 @@
 #!/bin/bash
 # Claude Code Status Writer
 # Usage: status-writer.sh <status>
-# status: running | waiting | idle | cleanup
+# status: running | idle | cleanup
 
 STATUS_DIR="/tmp/cc-status"
 mkdir -p "$STATUS_DIR"

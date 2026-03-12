@@ -20,16 +20,6 @@
         ]
       }
     ],
-    "PermissionRequest": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/status-writer.sh waiting"
-          }
-        ]
-      }
-    ],
     "Stop": [
       {
         "hooks": [
